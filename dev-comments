@@ -1,0 +1,12 @@
+// .to("mock:result")
+// from("timer://jdkTimer?period=100")
+// .routeId("ws send")
+// .process(new Processor() {
+// 	def count = 0
+// 	def void process(Exchange exchange) {
+// 		count++
+// 		exchange.getOut().setHeader('count', count);
+// 	}
+// })
+// .setBody().simple('g')
+// .to(uri)

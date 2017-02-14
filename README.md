@@ -5,7 +5,7 @@ https://en.wikipedia.org/wiki/Parkinson's_disease
 Hardware:
 ========
 
-Chip: MPU-9250 + BMP280
+[Chip: MPU-9250 + BMP280](docs/hardware-specifications/MPU-9250)
 
 Excell formulas:
 ========

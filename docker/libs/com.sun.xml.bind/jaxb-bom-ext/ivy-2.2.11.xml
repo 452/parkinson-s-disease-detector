@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
+	<info organisation="com.sun.xml.bind"
+		module="jaxb-bom-ext"
+		revision="2.2.11"
+		status="release"
+		publication="20141010105100"
+	>
+		<description homepage="">
+		JAXB Bill of Materials (BOM) with all dependencies.
+        If you are not sure - DON&apos;T USE THIS BOM. Use com.sun.xml.bind:jaxb-bom instead.
+		</description>
+		<m:properties__ant.version>1.9.0</m:properties__ant.version>
+		<m:properties__relaxngDatatype.version>20020414</m:properties__relaxngDatatype.version>
+		<m:properties__dtd-parser.version>1.1</m:properties__dtd-parser.version>
+		<m:properties__isorelax.version>20090621</m:properties__isorelax.version>
+		<m:properties__xsom.version>20140925</m:properties__xsom.version>
+		<m:properties__msv.version>2013.6.1</m:properties__msv.version>
+		<m:properties__jaxb-api.version>2.2.12-b140109.1041</m:properties__jaxb-api.version>
+		<m:properties__stax-ex.version>1.7.7</m:properties__stax-ex.version>
+		<m:properties__fastinfoset.version>1.2.13</m:properties__fastinfoset.version>
+		<m:properties__istack.version>2.21</m:properties__istack.version>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__jvnetDistMgmtSnapshotsUrl>https://maven.java.net/content/repositories/snapshots/</m:properties__jvnetDistMgmtSnapshotsUrl>
+		<m:dependency.management__org.glassfish.jaxb__jaxb-runtime__version>2.2.11</m:dependency.management__org.glassfish.jaxb__jaxb-runtime__version>
+		<m:dependency.management__org.glassfish.jaxb__jaxb-core__version>2.2.11</m:dependency.management__org.glassfish.jaxb__jaxb-core__version>
+		<m:dependency.management__org.glassfish.jaxb__jaxb-xjc__version>2.2.11</m:dependency.management__org.glassfish.jaxb__jaxb-xjc__version>
+		<m:dependency.management__org.glassfish.jaxb__jaxb-jxc__version>2.2.11</m:dependency.management__org.glassfish.jaxb__jaxb-jxc__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-impl__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-impl__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-core__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-core__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-xjc__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-xjc__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-jxc__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-jxc__version>
+		<m:dependency.management__javax.xml.bind__jaxb-api__version>2.2.12-b140109.1041</m:dependency.management__javax.xml.bind__jaxb-api__version>
+		<m:dependency.management__org.jvnet.staxex__stax-ex__version>1.7.7</m:dependency.management__org.jvnet.staxex__stax-ex__version>
+		<m:dependency.management__com.sun.xml.fastinfoset__FastInfoset__version>1.2.13</m:dependency.management__com.sun.xml.fastinfoset__FastInfoset__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-osgi__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-osgi__version>
+		<m:dependency.management__com.sun.xml.bind__jaxb-extra-osgi__version>2.2.11</m:dependency.management__com.sun.xml.bind__jaxb-extra-osgi__version>
+		<m:dependency.management__com.sun.istack__istack-commons-runtime__version>2.21</m:dependency.management__com.sun.istack__istack-commons-runtime__version>
+		<m:dependency.management__com.sun.xml.fastinfoset__FastInfoset__exclusion_0>javax.xml.bind__jsr173_api</m:dependency.management__com.sun.xml.fastinfoset__FastInfoset__exclusion_0>
+		<m:dependency.management__org.jvnet.staxex__stax-ex__exclusion_0>javax.activation__activation</m:dependency.management__org.jvnet.staxex__stax-ex__exclusion_0>
+		<m:dependency.management__org.jvnet.staxex__stax-ex__exclusion_1>javax.xml.stream__stax-api</m:dependency.management__org.jvnet.staxex__stax-ex__exclusion_1>
+		<m:dependency.management__com.sun.xml.bind.external__rngom__version>2.2.11</m:dependency.management__com.sun.xml.bind.external__rngom__version>
+		<m:dependency.management__com.sun.xsom__xsom__version>20140925</m:dependency.management__com.sun.xsom__xsom__version>
+		<m:dependency.management__com.sun.xml.dtd-parser__dtd-parser__version>1.1</m:dependency.management__com.sun.xml.dtd-parser__dtd-parser__version>
+		<m:dependency.management__com.sun.istack__istack-commons-tools__version>2.21</m:dependency.management__com.sun.istack__istack-commons-tools__version>
+		<m:dependency.management__org.apache.ant__ant__version>1.9.0</m:dependency.management__org.apache.ant__ant__version>
+		<m:dependency.management__net.java.dev.msv__msv-core__version>2013.6.1</m:dependency.management__net.java.dev.msv__msv-core__version>
+		<m:dependency.management__relaxngDatatype__relaxngDatatype__version>20020414</m:dependency.management__relaxngDatatype__relaxngDatatype__version>
+		<m:dependency.management__net.java.dev.msv__xsdlib__version>2013.6.1</m:dependency.management__net.java.dev.msv__xsdlib__version>
+		<m:dependency.management__com.sun.xml.bind.jaxb__isorelax__version>20090621</m:dependency.management__com.sun.xml.bind.jaxb__isorelax__version>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+	</publications>
+</ivy-module>

@@ -18,7 +18,9 @@ Convert unix time to Excell:
 Usage
 -----
 ```sh
-docker run -it -v $(pwd):/pd --rm i452/pd groovy pd.groovy
+docker run -it -v $(pwd):/pd --rm --name pd i452/pd
+docker run -it -v $(pwd):/pd --rm -p 9999:8080 --name pd i452/pd
+# -p 9999:8080 http://localhost:9999/hawtio
 ```
 
 Download Java libraries

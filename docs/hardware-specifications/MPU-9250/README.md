@@ -24,3 +24,5 @@ sample rate, compass at 8Hz rate)
  400kHz Fast Mode I²C or 20MHz SPI with 512 byte FIFO
 
 https://www.aliexpress.com/item/MPU9250-BMP280-SPI-IIC-10DOF-9-Axis-Gyroscope-Acceleration-Baromete-Attitude-Sensor-Shaft-Accelerate-Gyroscope-Compass/32691756074.html?spm=2114.13010608.0.0.f3OmtK
+
+http://www.russianelectronics.ru/developer-r/review/2193/doc/48411/

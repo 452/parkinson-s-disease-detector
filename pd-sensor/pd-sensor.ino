@@ -168,6 +168,8 @@ void setupMPU9250() {
     Serial.print(myIMU.SelfTest[4], 1); Serial.println("% of factory value");
     Serial.print("z-axis self test: gyration trim within : ");
     Serial.print(myIMU.SelfTest[5], 1); Serial.println("% of factory value");
+    // Calibrate gyro and accelerometers, load biases in bias registers
+    myIMU.calibrateMPU9250(myIMU.gyroBias, myIMU.accelBias);
     myIMU.initMPU9250();
     Serial.println("MPU9250 initialized for active data mode....");
     byte d = myIMU.readByte(AK8963_ADDRESS, WHO_AM_I_AK8963);
@@ -193,18 +195,15 @@ void setupMPU9250() {
   }
   // Set accelerometers low pass filter at 5Hz
   I2CwriteByte(MPU9250_ADDRESS, 29, 0x06);
-  //  // Set gyroscope low pass filter at 5Hz
+  // Set gyroscope low pass filter at 5Hz
   I2CwriteByte(MPU9250_ADDRESS, 26, 0x06);
-  //  // Configure gyroscope range
+  // Configure gyroscope range
   I2CwriteByte(MPU9250_ADDRESS, 27, GYRO_FULL_SCALE_250_DPS);
-  //  // Configure accelerometers range
+  // Configure accelerometers range
   I2CwriteByte(MPU9250_ADDRESS, 28, ACC_FULL_SCALE_2_G);
   // Set by pass mode for the magnetometers
-  //  I2CwriteByte(MPU9250_ADDRESS, 0x37, 0x02);
-  //  I2CwriteByte(MAG_ADDRESS, 0x0A, 0x16);
-
-  // Calibrate gyro and accelerometers, load biases in bias registers
-  myIMU.calibrateMPU9250(myIMU.gyroBias, myIMU.accelBias);
+  I2CwriteByte(MPU9250_ADDRESS, 0x37, 0x6);
+  I2CwriteByte(MAG_ADDRESS, 0x0A, 0x6);
   // Get sensor resolutions, only need to do this once
   myIMU.getAres();
   myIMU.getGres();

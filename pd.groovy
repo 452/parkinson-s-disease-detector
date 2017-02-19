@@ -171,15 +171,15 @@ class Packet {
 				time = bb.getInt();
 				temperature = bb.getFloat();
                 hz = bb.getFloat();
-                accelerometerX = (int) 1000 * accelerometerX;
-                accelerometerY = (int) 1000 * accelerometerY;
-                accelerometerZ = (int) 1000 * accelerometerZ;
-                gyroscopeX = (int) gyroscopeX;
-                gyroscopeY = (int) gyroscopeY;
-                gyroscopeZ = (int) gyroscopeZ;
-                magnetometerX = (int) magnetometerX;
-                magnetometerY = (int) magnetometerY;
-                magnetometerZ = (int) magnetometerZ;
+                // accelerometerX = (int) 1000 * accelerometerX;
+                // accelerometerY = (int) 1000 * accelerometerY;
+                // accelerometerZ = (int) 1000 * accelerometerZ;
+                // gyroscopeX = (int) gyroscopeX;
+                // gyroscopeY = (int) gyroscopeY;
+                // gyroscopeZ = (int) gyroscopeZ;
+                // magnetometerX = (int) magnetometerX;
+                // magnetometerY = (int) magnetometerY;
+                // magnetometerZ = (int) magnetometerZ;
                 vcc = vcc / 1000.0;
                 temperature = temperature / 333.87 + 21.0;
 			}

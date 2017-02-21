@@ -273,6 +273,7 @@ void updateSensorsData() {
 void setupWIFI() {
   WiFi.hostname("pd-sensor");
   WiFiMulti.addAP("}RooT{", ROOT_PASSWORD_KIEV);
+  WiFiMulti.addAP("striker", OFFICE_PASSWORD_KIEV);
 
   while (WiFiMulti.run() != WL_CONNECTED) {
     delay(100);

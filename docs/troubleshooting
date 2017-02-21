@@ -1,0 +1,13 @@
+
+Java Build: Java(TM) SE Runtime Environment (build 9-ea+157)
+```sh
+parkinson-s-disease-detector$ groovy pd.groovy 
+Caught: java.lang.NoClassDefFoundError: Ljavax/xml/bind/JAXBContext;
+java.lang.NoClassDefFoundError: Ljavax/xml/bind/JAXBContext;
+	at pd.run(pd.groovy:29)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBContext
+	... 4 more
+```

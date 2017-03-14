@@ -101,7 +101,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
 
 void sendDataToPC() {
   if (deviceConnected) {
-    updateSensorsData();
     DataPacket dataPackage;
     dataPackage.accelerometerX = myIMU.ax;
     dataPackage.accelerometerY = myIMU.ay;
@@ -123,6 +122,7 @@ void sendDataToPC() {
 }
 
 void setup() {
+  ESP.wdtDisable();
   Wire.setClock(400000L);
   Wire.begin();
   Serial.begin(115200);
@@ -132,19 +132,45 @@ void setup() {
   setupHTTPServer();
   setupMDNS();
   setupNTP();
+  interruptSetup();
+  ESP.wdtEnable(WDTO_8S);
   Serial.println("Device initialized");
 }
 
-void loop() {
-  webSocket.loop();
+void measure(void) {
   myIMU.delt_t = millis() - myIMU.count;
-  //  if (myIMU.delt_t > 3) {
+  updateSensorsData();
   sendDataToPC();
   myIMU.count = millis();
   myIMU.sumCount = 0;
   myIMU.sum = 0;
-  //  }
+}
+
+// 160Mhz -> 160*10^6 = 1 second
+// 60 Hz -> 1/60*1000000 = 16666.666666667 microsecond(period) (µs(p))
+// microsecond -> 16666*160/1.47 = 1813986
+// 1/60*1000000*160/1.47
+#define TIMER0_TIME 1814058
+
+void inline timer0_ISR (void) {
+  noInterrupts();
+  measure();
+  timer0_write(ESP.getCycleCount() + TIMER0_TIME);
+  interrupts();
+}
+
+void interruptSetup() {
+  noInterrupts();
+  timer0_isr_init();
+  timer0_attachInterrupt(timer0_ISR);
+  timer0_write(ESP.getCycleCount() + TIMER0_TIME);
+  interrupts();
+}
+
+void loop() {
+  webSocket.loop();
   //server.handleClient();
+  ESP.wdtFeed();
 }
 
 void setupMPU9250() {
@@ -194,9 +220,9 @@ void setupMPU9250() {
     while (1);
   }
   // Set accelerometers low pass filter at 5Hz
-  I2CwriteByte(MPU9250_ADDRESS, 29, 0x06);
+  //  I2CwriteByte(MPU9250_ADDRESS/, 29, 0x06);
   // Set gyroscope low pass filter at 5Hz
-  I2CwriteByte(MPU9250_ADDRESS, 26, 0x06);
+  //  I2CwriteByte(MPU9250_ADDRESS, 2/6, 0x06);
   // Configure gyroscope range
   I2CwriteByte(MPU9250_ADDRESS, 27, GYRO_FULL_SCALE_250_DPS);
   // Configure accelerometers range
@@ -240,33 +266,33 @@ void updateSensorsData() {
                myIMU.magbias[1];
     myIMU.mz = (float)myIMU.magCount[2] * myIMU.mRes * myIMU.magCalibration[2] -
                myIMU.magbias[2];
-  }
-  myIMU.updateTime();
-  MahonyQuaternionUpdate(myIMU.ax, myIMU.ay, myIMU.az, myIMU.gx * DEG_TO_RAD,
-                         myIMU.gy * DEG_TO_RAD, myIMU.gz * DEG_TO_RAD, myIMU.my,
-                         myIMU.mx, myIMU.mz, myIMU.deltat);
-  myIMU.yaw   = atan2(2.0f * (*(getQ() + 1) * *(getQ() + 2) + *getQ()
-                              * *(getQ() + 3)), *getQ() * *getQ() + * (getQ() + 1)
-                      * *(getQ() + 1) - * (getQ() + 2) * *(getQ() + 2) - * (getQ() + 3)
-                      * *(getQ() + 3));
-  myIMU.pitch = -asin(2.0f * (*(getQ() + 1) * *(getQ() + 3) - *getQ()
-                              * *(getQ() + 2)));
-  myIMU.roll  = atan2(2.0f * (*getQ() * *(getQ() + 1) + * (getQ() + 2)
-                              * *(getQ() + 3)), *getQ() * *getQ() - * (getQ() + 1)
-                      * *(getQ() + 1) - * (getQ() + 2) * *(getQ() + 2) + * (getQ() + 3)
-                      * *(getQ() + 3));
-  myIMU.pitch *= RAD_TO_DEG;
-  myIMU.yaw   *= RAD_TO_DEG;
+    myIMU.updateTime();
+    MahonyQuaternionUpdate(myIMU.ax, myIMU.ay, myIMU.az, myIMU.gx * DEG_TO_RAD,
+                           myIMU.gy * DEG_TO_RAD, myIMU.gz * DEG_TO_RAD, myIMU.my,
+                           myIMU.mx, myIMU.mz, myIMU.deltat);
+    myIMU.yaw   = atan2(2.0f * (*(getQ() + 1) * *(getQ() + 2) + *getQ()
+                                * *(getQ() + 3)), *getQ() * *getQ() + * (getQ() + 1)
+                        * *(getQ() + 1) - * (getQ() + 2) * *(getQ() + 2) - * (getQ() + 3)
+                        * *(getQ() + 3));
+    myIMU.pitch = -asin(2.0f * (*(getQ() + 1) * *(getQ() + 3) - *getQ()
+                                * *(getQ() + 2)));
+    myIMU.roll  = atan2(2.0f * (*getQ() * *(getQ() + 1) + * (getQ() + 2)
+                                * *(getQ() + 3)), *getQ() * *getQ() - * (getQ() + 1)
+                        * *(getQ() + 1) - * (getQ() + 2) * *(getQ() + 2) + * (getQ() + 3)
+                        * *(getQ() + 3));
+    myIMU.pitch *= RAD_TO_DEG;
+    myIMU.yaw   *= RAD_TO_DEG;
 
-  // Declination of SparkFun Electronics (40°05'26.6"N 105°11'05.9"W) is
-  //   8° 30' E  ± 0° 21' (or 8.5°) on 2016-07-19
-  // Latitude: 50° 26' 53" N
-  // Longitude:  30° 30' 8" E
-  // Date  Declination
-  // 2017-02-15  7° 31' E  ± 0° 22'  changing by  0° 7' E per year
-  // - http://www.ngdc.noaa.gov/geomag-web/#declination
-  myIMU.yaw  -= 0.7;
-  myIMU.roll *= RAD_TO_DEG;
+    // Declination of SparkFun Electronics (40°05'26.6"N 105°11'05.9"W) is
+    //   8° 30' E  ± 0° 21' (or 8.5°) on 2016-07-19
+    // Latitude: 50° 26' 53" N
+    // Longitude:  30° 30' 8" E
+    // Date  Declination
+    // 2017-02-15  7° 31' E  ± 0° 22'  changing by  0° 7' E per year
+    // - http://www.ngdc.noaa.gov/geomag-web/#declination
+    myIMU.yaw  -= 0.7;
+    myIMU.roll *= RAD_TO_DEG;
+  }
 }
 
 
